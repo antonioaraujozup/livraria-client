@@ -1,2 +1,29 @@
 server:
   port: 8081
+  error:
+    include-message: always
+
+feign:
+  client:
+    config:
+      livrosClient:
+        loggerLevel: full
+
+logging:
+  level:
+    org.springframework.web.client: DEBUG
+    br.com.zup.edu.livrariaclient.client.LivrosClient: DEBUG
+
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          livros:
+            authorization-grant-type: client_credentials
+            client-id: exposicao-livros-client
+            client-secret: IPt3sNnsra76VqKk9ju1PYx9KfB0CLWF
+            scope: livros:read, autores:read
+        provider:
+          livros:
+            token-uri: http://localhost:18080/realms/livraria/protocol/openid-connect/token
